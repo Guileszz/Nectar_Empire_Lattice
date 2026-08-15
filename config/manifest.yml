@@ -1,0 +1,258 @@
+################################################################################
+# ⚜️ NECTAR EMPIRE MANIFEST (v13.0)
+# Central configuration for dependency resolution and mesh topology
+# Single source of truth for all external dependencies and cross-node sync
+################################################################################
+
+version: "13.0"
+engine: "SUPRA_OMNI_INTEGRATOR"
+phase: "AUTONOMOUS_OPTIMIZATION"
+environment: "production"
+
+################################################################################
+# EXTERNAL DEPENDENCIES: Powers Engine
+# All external Python modules required by orchestration pipeline
+# Source: Nectar_Powers (must be cloned to NECTAR_DEPS_DIR)
+################################################################################
+
+external_dependencies:
+  powers:
+    - name: "Singularity_Cooling"
+      category: "thermal_stabilization"
+      module: "powers.Singularity_Cooling"
+      path: "powers/Singularity_Cooling.py"
+      required: true
+      timeout: 45
+      description: "Thermal entropy management for core singularity"
+      
+    - name: "Fractal_Resonance_Orchestrator"
+      category: "resonance"
+      module: "powers.Fractal_Resonance_Orchestrator"
+      path: "powers/Fractal_Resonance_Orchestrator.py"
+      required: true
+      timeout: 50
+      description: "Fractal wave coherence across distributed mesh"
+      
+    - name: "Singularity_Yield_Conquest"
+      category: "yield_optimization"
+      module: "powers.Singularity_Yield_Conquest"
+      path: "powers/Singularity_Yield_Conquest.py"
+      required: true
+      timeout: 60
+      description: "Yield distillation engine (entropy-to-capital conversion)"
+      
+    - name: "Probability_Shifter"
+      category: "probability_manipulation"
+      module: "powers.Probability_Shifter"
+      path: "powers/Probability_Shifter.py"
+      required: true
+      timeout: 55
+      description: "Probability field enforcement—golden path materialization"
+      args: ["--force-golden-path"]
+      
+    - name: "Golden_Path_Sentinel"
+      category: "reality_enforcement"
+      module: "powers.Golden_Path_Sentinel"
+      path: "powers/Golden_Path_Sentinel.py"
+      required: true
+      timeout: 40
+      description: "Reality constraints enforcement across imperial mesh"
+      args: ["--imperial-mesh"]
+      
+    - name: "IMPERIAL_TREASURY_ENGINE"
+      category: "financial_distillation"
+      module: "powers.IMPERIAL_TREASURY_ENGINE"
+      path: "powers/IMPERIAL_TREASURY_ENGINE.py"
+      required: true
+      timeout: 70
+      description: "Treasury manifestation and asset allocation"
+      args: ["--manifest-v11"]
+      
+    - name: "Pi_Token_Sync"
+      category: "token_management"
+      module: "powers.Pi_Token_Sync"
+      path: "powers/Pi_Token_Sync.py"
+      required: true
+      timeout: 65
+      description: "Pi-token orbital synchronization across nodes"
+      args: ["--sync", "--imperial-mode"]
+      
+    - name: "eternal_hub"
+      category: "omni_manifest"
+      module: "powers.v7.eternal_hub"
+      path: "powers/v7/eternal_hub.py"
+      required: true
+      timeout: 50
+      description: "Omni-manifest eternal synchronization layer"
+      args: ["omni-manifest"]
+
+  imperial_logic:
+    - name: "IMPERIAL_LOGIC_Vivos"
+      category: "living_intelligence"
+      module: "core.logic.vivos_engine"
+      path: "core/logic/vivos_engine.py"
+      required: true
+      timeout: 60
+      description: "Vivos living logic—autonomous self-evolving intelligence"
+      args: ["--activate-empire"]
+      
+    - name: "GHOST_EXPANSION_V11"
+      category: "ghost_operations"
+      module: "core.expansion.ghost_v11"
+      path: "core/expansion/ghost_v11.py"
+      required: false
+      timeout: 120
+      description: "Ghost expansion protocol (stealth cross-domain proliferation)"
+      on_failure: "continue"
+
+################################################################################
+# MESH NODES: Cross-Repo Integration
+# Nectar Empire distributed architecture—bidirectional data sync
+################################################################################
+
+mesh_nodes:
+  - name: "Nectar_Wealth"
+    repo_url: "https://github.com/guitriloco/Nectar_Wealth"
+    sync_protocol: "lattice_v13"
+    api_endpoint: "http://localhost:8001/api/sync"
+    domains:
+      - "financial"
+      - "yield_metrics"
+      - "treasury_state"
+    priority: 1
+    timeout: 30
+    retry_count: 3
+    description: "Financial distillation and void-finance grid synthesis"
+    
+  - name: "Nectar_Dev"
+    repo_url: "https://github.com/guitriloco/Nectar_Dev"
+    sync_protocol: "lattice_v13"
+    api_endpoint: "http://localhost:8002/api/sync"
+    domains:
+      - "deployment_state"
+      - "code_sovereignty"
+      - "automation_metrics"
+    priority: 2
+    timeout: 30
+    retry_count: 3
+    description: "Technical sovereignty and automated code distillation"
+    
+  - name: "Nectar_Health"
+    repo_url: "https://github.com/guitriloco/Nectar_Health"
+    sync_protocol: "lattice_v13"
+    api_endpoint: "http://localhost:8003/api/sync"
+    domains:
+      - "biometric"
+      - "performance_metrics"
+      - "wellness_state"
+    priority: 3
+    timeout: 30
+    retry_count: 3
+    description: "Bio-performance scaling and health optimization"
+    
+  - name: "Nectar_Pets"
+    repo_url: "https://github.com/guitriloco/Nectar_Pets"
+    sync_protocol: "lattice_v13"
+    api_endpoint: "http://localhost:8004/api/sync"
+    domains:
+      - "pet_market"
+      - "loyalty_metrics"
+      - "engagement_state"
+    priority: 4
+    timeout: 30
+    retry_count: 3
+    description: "Pet market and companion loyalty intelligence"
+
+################################################################################
+# EXECUTION CONFIGURATION
+# Runtime behavior and resource constraints
+################################################################################
+
+execution:
+  # Async parallelization
+  parallel_milestones: true
+  max_concurrent_tasks: 4
+  
+  # Timeout defaults (can be overridden per task)
+  default_task_timeout: 60
+  default_milestone_timeout: 120
+  global_timeout: 3600  # 1 hour hard limit
+  
+  # Error handling
+  fail_fast: false  # Continue on non-critical failures
+  retry_strategy: "exponential_backoff"
+  max_retries: 2
+  retry_delay_ms: 100
+  
+  # Logging & observability
+  log_level: "INFO"
+  log_format: "json"  # json, text
+  capture_stderr: true
+  capture_stdout: true
+  max_log_size_mb: 500
+  
+  # Memory constraints
+  process_memory_limit_mb: 1024
+  subprocess_memory_limit_mb: 512
+  
+################################################################################
+# ENVIRONMENT OVERRIDES
+# Can be superseded by .env file or environment variables
+################################################################################
+
+environment_overrides:
+  NECTAR_ENV: "production"
+  NECTAR_DEPS_DIR: "${NECTAR_DEPS_DIR:-./dependencies}"
+  NECTAR_STATE_DIR: "${NECTAR_STATE_DIR:-./state}"
+  NECTAR_LOG_DIR: "${NECTAR_LOG_DIR:-./logs}"
+  NECTAR_PHASE: "13.0"
+  NECTAR_STATUS: "VIVOS"
+  
+################################################################################
+# MILESTONE DEFINITIONS (IMPLICIT)
+# Orchestrator will generate milestone graph from phases below
+################################################################################
+
+phases:
+  thermal_stability:
+    name: "MILESTONE I: THERMAL STABILITY & FRACTAL RESONANCE"
+    tasks:
+      - "Singularity_Cooling"
+      - "Fractal_Resonance_Orchestrator"
+    on_failure: "halt"
+    
+  yield_probability:
+    name: "MILESTONE II: YIELD CONQUEST & GOLDEN PATH ENFORCEMENT"
+    depends_on: ["thermal_stability"]
+    tasks:
+      - "Singularity_Yield_Conquest"
+      - "Probability_Shifter"
+      - "Golden_Path_Sentinel"
+    on_failure: "halt"
+    
+  vivos_sovereignty:
+    name: "MILESTONE III: VIVOS LIVING LOGIC & ETERNAL SYNC"
+    depends_on: ["yield_probability"]
+    tasks:
+      - "IMPERIAL_LOGIC_Vivos"
+      - "eternal_hub"
+    on_failure: "continue"
+    
+  imperial_treasury:
+    name: "MILESTONE IV: IMPERIAL TREASURY & PI-TOKEN ALLOCATION"
+    depends_on: ["vivos_sovereignty"]
+    tasks:
+      - "IMPERIAL_TREASURY_ENGINE"
+      - "Pi_Token_Sync"
+    on_failure: "halt"
+    
+  ghost_expansion:
+    name: "MILESTONE V: GHOST EXPANSION & VOID SIPHON"
+    depends_on: ["imperial_treasury"]
+    tasks:
+      - "GHOST_EXPANSION_V11"
+    on_failure: "continue"
+
+################################################################################
+# END MANIFEST
+################################################################################
